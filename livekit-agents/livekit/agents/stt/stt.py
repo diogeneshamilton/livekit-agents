@@ -45,7 +45,6 @@ class SpeechEvent:
     type: SpeechEventType
     alternatives: List[SpeechData] = field(default_factory=list)
 
-
 class STT(ABC):
     def __init__(
         self,
