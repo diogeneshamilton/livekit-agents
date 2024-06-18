@@ -41,6 +41,7 @@ class SpeechData:
     confidence: float = 0.0  # [0, 1]
     words: List[SpeechWord] = field(default_factory=list)
 
+@dataclass
 class SpeechEvent:
     type: SpeechEventType
     alternatives: List[SpeechData] = field(default_factory=list)
