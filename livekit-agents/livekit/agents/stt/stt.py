@@ -29,8 +29,8 @@ class SpeechWord:
     start_time: float
     end_time: float
     word: str
+    punctuated_word: str = ""
     confidence: float = 0.0
-    punctuated_word: str
 
 @dataclass
 class SpeechData:
