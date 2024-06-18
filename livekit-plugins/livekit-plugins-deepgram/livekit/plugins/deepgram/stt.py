@@ -436,7 +436,7 @@ def live_transcription_to_speech_data(
             end_time=alt["words"][-1]["end"] if alt["words"] else 0,
             confidence=alt["confidence"],
             text=alt["transcript"],
-            words=alt["words"] if alt["words"] else [],
+            words=alt["words"] if len(alt["words"]) > 0 else [],
         )
         for alt in dg_alts
     ]
