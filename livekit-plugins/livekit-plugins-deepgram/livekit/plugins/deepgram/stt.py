@@ -19,6 +19,7 @@ import dataclasses
 import io
 import json
 import os
+import time
 import wave
 from contextlib import suppress
 from dataclasses import dataclass
@@ -176,6 +177,7 @@ class SpeechStream(stt.SpeechStream):
         self._event_queue = asyncio.Queue[Optional[stt.SpeechEvent]]()
         self._closed = False
         self._main_task = asyncio.create_task(self._run(max_retry))
+        self._session_start_time = 0
 
         # keep a list of final transcripts to combine them inside the END_OF_SPEECH event
         self._final_events: List[stt.SpeechEvent] = []
@@ -227,6 +229,7 @@ class SpeechStream(stt.SpeechStream):
 
                     url = f"wss://api.deepgram.com/v1/listen?{urlencode(live_config).lower()}"
                     ws = await self._session.ws_connect(url, headers=headers)
+                    self._session_start_time = int(time.time() * 1000)
                     retry_count = 0  # connected successfully, reset the retry_count
 
                     await self._run_ws(ws)
