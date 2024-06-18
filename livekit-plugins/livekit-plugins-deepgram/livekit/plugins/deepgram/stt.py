@@ -413,7 +413,7 @@ class SpeechStream(stt.SpeechStream):
         elif data["type"] == "Metadata":
             pass
         else:
-            logger.warning("received unexpected message from deepgram %s", data)
+            logger.warning("received unexpected message from deepgram %s", alts)
 
     async def __anext__(self) -> stt.SpeechEvent:
         evt = await self._event_queue.get()
