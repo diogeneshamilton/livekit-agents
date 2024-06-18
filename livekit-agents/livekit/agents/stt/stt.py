@@ -25,15 +25,22 @@ class SpeechEventType(Enum):
 
 
 @dataclass
+class SpeechWord:
+    start_time: float
+    end_time: float
+    word: str
+    confidence: float = 0.0
+    punctuated_word: str
+
+@dataclass
 class SpeechData:
     language: str
     text: str
     start_time: float = 0.0
     end_time: float = 0.0
     confidence: float = 0.0  # [0, 1]
+    words: List[SpeechWord] = field(default_factory=list)
 
-
-@dataclass
 class SpeechEvent:
     type: SpeechEventType
     alternatives: List[SpeechData] = field(default_factory=list)
